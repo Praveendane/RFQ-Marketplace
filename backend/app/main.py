@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -5,10 +7,18 @@ from fastapi.responses import JSONResponse
 from app.routers.auth import router as auth_router
 from app.routers.rfq import router as rfq_router
 from app.routers.quotation import router as quotation_router
+from database import create_tables
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_tables()
+    yield
 
 
 app = FastAPI(
-    title="RFQ Marketplace API"
+    title="RFQ Marketplace API",
+    lifespan=lifespan
 )
 
 
