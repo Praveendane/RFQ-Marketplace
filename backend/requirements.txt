@@ -1,0 +1,13 @@
+\@"
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-jose
+passlib
+bcrypt==4.0.1
+python-dotenv
+pydantic
+pydantic-settings
+email-validator
+"@ | Set-Content -Path backend\requirements.txt
